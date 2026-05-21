@@ -8,7 +8,6 @@ const nav = document.getElementById('nav-mount').innerHTML = renderNavBar();
 //toggle between light and dark mode
 initThemeToggle();
 
-
 const slug = window.location.pathname.split('/')[2]
 
 
@@ -34,9 +33,9 @@ const dateISO = date.toISOString().split('T')[0];
 
 // For user-friendly display
 const dateReadable = date.toLocaleDateString("en-CA", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
 });
 
 const dateElement = document.createElement("time");
@@ -50,7 +49,7 @@ document.getElementById("date").append(dateElement, seperator);
 const ttrElem = document.getElementById('ttr');
 const ttr = document.createElement('p')
 ttr.textContent = `${post.readingTime} min read`;
-ttrElem.appendChild(ttr) ;
+ttrElem.appendChild(ttr);
 
 
 
@@ -82,80 +81,81 @@ const container = document.querySelector('#content');
 
 // Render blocks
 post.content.blocks.forEach(block => {
-  let element;
+    let element;
 
 
-  switch (block.type) {
-    case 'header':
-        element = document.createElement(`h${block.data.level}`);
-        element.innerHTML = DOMPurify.sanitize(block.data.text);
-        element.className = `post-heading post-heading--${block.data.level}`;
+    switch (block.type) {
+        case 'header':
+            element = document.createElement(`h${block.data.level}`);
+            element.innerHTML = DOMPurify.sanitize(block.data.text);
+            element.className = `post-heading post-heading--${block.data.level}`;
 
-      break;
+            break;
 
-    case 'paragraph':
-      element = document.createElement('p');
-      element.innerHTML = DOMPurify.sanitize(block.data.text);
-      element.className = 'post-paragraph';
-      break;
+        case 'paragraph':
+            element = document.createElement('p');
+            element.innerHTML = DOMPurify.sanitize(block.data.text);
+            element.className = 'post-paragraph';
+            break;
 
-    case 'list':
-        element = document.createElement(block.data.style === 'ordered' ? 'ol' : 'ul');
-        element.className = `post-list post-list--${block.data.style}`;
-        block.data.items.forEach(item => {
-            const li = document.createElement('li');
-            li.innerHTML = DOMPurify.sanitize(item);
-            li.className = 'post-list__item';
-            element.appendChild(li);
-        });
-        break;
+        case 'list':
+            element = document.createElement(block.data.style === 'ordered' ? 'ol' : 'ul');
+            element.className = `post-list post-list--${block.data.style}`;
+            block.data.items.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = DOMPurify.sanitize(item.content || item);
+                li.className = 'post-list__item';
+                element.appendChild(li);
+            });
+            break;
 
-    case 'image':
-        const figure = document.createElement('figure');
-        figure.className = 'post-image';
+        case 'image':
+            const figure = document.createElement('figure');
+            figure.className = 'post-image';
 
-        console.log(block.data)
+            console.log(block.data)
 
-        element = document.createElement('img');
-        element.loading = 'lazy';
-        element.src = block.data.url + '?w=800&q=75&auto=format';
-        element.alt = block.data.caption || '';
+            element = document.createElement('img');
+            element.loading = 'lazy';
+            element.src = block.data.url + '?w=800&q=75&auto=format';
+            element.alt = block.data.caption || '';
 
-        figure.appendChild(element);
+            figure.appendChild(element);
 
-        if (block.data.caption) {
-            let caption = document.createElement('figcaption');
-            caption.innerHTML = DOMPurify.sanitize(block.data.caption);
-            figure.appendChild(caption);
-        }
+            if (block.data.caption) {
+                let caption = document.createElement('figcaption');
+                caption.innerHTML = DOMPurify.sanitize(block.data.caption);
+                figure.appendChild(caption);
+            }
 
-        element = figure;
-        console.log(element);
+            element = figure;
+            console.log(element);
 
-        break;
+            break;
 
-    case 'quote':
-        element = document.createElement('blockquote');
-        element.innerHTML = DOMPurify.sanitize(block.data.text);
-        element.className = 'post-quote';
-        break;
+        case 'quote':
+            element = document.createElement('blockquote');
+            element.innerHTML = DOMPurify.sanitize(block.data.text);
+            element.className = 'post-quote';
+            break;
 
-    case 'code':
-        const pre = document.createElement('pre');
-        pre.className = 'post-code';
-        element = document.createElement('code');
-        element.textContent = block.data.code;
-        element.className = 'post-code__block';
-        pre.appendChild(element);
-        element = pre;
-        break;
+        case 'code':
+            const pre = document.createElement('pre');
+            pre.className = 'post-code';
+            element = document.createElement('code');
+            element.textContent = block.data.code;
+            element.className = 'post-code__block';
+            pre.appendChild(element);
+            element = pre;
+            break;
 
-    default:
-        console.warn(`Unhandled block type: ${block.type}`);
-        return;
-  }
 
-  container.appendChild(element);
+        default:
+            console.warn(`Unhandled block type: ${block.type}`);
+            return;
+    }
+
+    container.appendChild(element);
 
 });
 
@@ -170,7 +170,7 @@ thanks.textContent = 'Thanks for reading!'
 ending.appendChild(thanks);
 
 const more = document.createElement('a');
-more.href='/blog'
+more.href = '/blog'
 more.textContent = 'More blog posts';
 ending.appendChild(more);
 
@@ -182,14 +182,14 @@ const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 
 menuBtn.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('hidden');
-  mobileMenu.classList.toggle('flex');
+    const isOpen = mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
 
-  menuBtn.innerHTML = isOpen
-  ? '<i data-lucide="menu"></i>'
-  : '<i data-lucide="x"></i>';
+    menuBtn.innerHTML = isOpen
+        ? '<i data-lucide="menu"></i>'
+        : '<i data-lucide="x"></i>';
 
-  lucide.createIcons();
+    lucide.createIcons();
 });
 
 

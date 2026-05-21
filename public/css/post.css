@@ -93,19 +93,38 @@
   font-size: 1.125rem;
   line-height: 1.8;
   margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
+  padding-left: 3.5rem;
 }
 
 .post-list__item {
   margin-bottom: 0.5rem;
 }
 
+.post-list--ordered {
+    list-style-type: decimal;
+}
+
+.post-list--unordered {
+    list-style-type: disc;
+}
+
 .post-image {
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 8;
+  margin: 3.5rem 0;
   border-radius: 8px;
-  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.post-image figcaption{
+  text-align: center;
+  font-style: italic;
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
 }
 
 .post-quote {
