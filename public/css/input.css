@@ -209,6 +209,52 @@ body {
 }
 
 
+.icon-link {
+    position: relative;
+}
+
+.icon-link .tooltip {
+    position: absolute;
+    top: 125%;
+    left: 50%;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+.icon-link:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.icon-link:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dark .icon-link .tooltip {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.icon-link:first-child .tooltip {
+    left: 0;
+    transform: translateX(0) translateY(-4px);
+}
+
+.icon-link:first-child:hover .tooltip {
+    transform: translateX(0) translateY(0);
+}
+
+
 
 /* Light mode */
 .tag {

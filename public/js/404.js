@@ -1,4 +1,8 @@
 import { initThemeToggle } from './theme.js'
+import { renderNavBar } from './components/navBar.js'
+
+//render nav
+const nav = document.getElementById('nav-mount').innerHTML = renderNavBar();
 
 //toggle between light and dark mode
 initThemeToggle();
