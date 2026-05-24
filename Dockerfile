@@ -10,6 +10,8 @@ COPY . .
 
 RUN npx prisma generate
 
+RUN npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css
+
 ENV PORT=8080
 
 EXPOSE 8080
