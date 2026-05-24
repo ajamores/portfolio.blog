@@ -3,7 +3,7 @@ export const renderNavBar = () => {
     return `
         <header class="fixed top-0 left-0 right-0 py-4 shadow-1xl backdrop-blur-sm z-10 text-white ">
             <div class=" max-w-6xl mx-auto flex justify-between px-4 sm:px-6">
-                <a href="/" class="group w-fit">
+                <a href="/" class="group w-fit my-auto">
                     <h1
                         class=" nav-icon relative inline-block font-semibold text-xl sm:text-2xl tracking-wide 
                         text-sky-500 dark:text-ctp-peach
