@@ -5,7 +5,7 @@ export const renderNavBar = () => {
             <div class=" max-w-6xl mx-auto flex justify-between px-4 sm:px-6">
                 <a href="/" class="group w-fit">
                     <h1
-                        class=" nav-icon relative inline-block font-semibold text-2xl tracking-wide 
+                        class=" nav-icon relative inline-block font-semibold text-xl sm:text-2xl tracking-wide 
                         text-sky-500 dark:text-ctp-peach
                         transition-all duration-300 ease-out
                         group-hover:tracking-widest
@@ -32,16 +32,17 @@ export const renderNavBar = () => {
                     <button 
                         id="sunMoon"
                         aria-label="Toggle dark mode"
-                        class="border rounded-4xl p-1 cursor-pointer">
-                        <i data-lucide="sun"></i>
+                        class="border rounded-4xl p-0.5 md:p-1 cursor-pointer">
+                        <i data-lucide="sun" class="w-2 h-2 md:w-5 md:h-5"></i>
                     </button>
 
                     <button 
                         id="menuBtn"
                         aria-label="Open navigation menu"
                         class="block md:hidden cursor-pointer">
-                        <i data-lucide="menu"></i>
+                        <i data-lucide="menu" ></i>
                     </button>
+
                     <a href="/blog" class="hidden md:flex ">Blog</a>
                     <a href="https://github.com/ajamores" class="hidden md:flex ">Github</a>
                     <a href="https://www.linkedin.com/in/armandamores/" class="hidden md:flex ">Linkedin</a>
