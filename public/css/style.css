@@ -1260,12 +1260,6 @@
   .bg-ctp-latte-text {
     background-color: var(--color-ctp-latte-text);
   }
-  .bg-ctp-latte-text\/80 {
-    background-color: color-mix(in srgb, #4c4f69 80%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-ctp-latte-text) 80%, transparent);
-    }
-  }
   .bg-ctp-mantle {
     background-color: var(--color-ctp-mantle);
   }
@@ -2074,16 +2068,6 @@
       width: calc(var(--spacing) * 125);
     }
   }
-  .sm\:mr-15 {
-    @media (width >= 40rem) {
-      margin-right: calc(var(--spacing) * 15);
-    }
-  }
-  .sm\:ml-15 {
-    @media (width >= 40rem) {
-      margin-left: calc(var(--spacing) * 15);
-    }
-  }
   .sm\:h-74 {
     @media (width >= 40rem) {
       height: calc(var(--spacing) * 74);
@@ -2094,9 +2078,19 @@
       width: calc(var(--spacing) * 74);
     }
   }
+  .sm\:w-auto {
+    @media (width >= 40rem) {
+      width: auto;
+    }
+  }
   .sm\:grid-cols-2 {
     @media (width >= 40rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .sm\:flex-row {
+    @media (width >= 40rem) {
+      flex-direction: row;
     }
   }
   .sm\:px-6 {
@@ -2113,12 +2107,6 @@
     @media (width >= 40rem) {
       font-size: var(--text-3xl);
       line-height: var(--tw-leading, var(--text-3xl--line-height));
-    }
-  }
-  .sm\:text-4xl {
-    @media (width >= 40rem) {
-      font-size: var(--text-4xl);
-      line-height: var(--tw-leading, var(--text-4xl--line-height));
     }
   }
   .sm\:text-5xl {
