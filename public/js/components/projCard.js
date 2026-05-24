@@ -1,17 +1,17 @@
 export function renderProjCard(proj) {
 
-  const title = `<h3 class="text-3xl text-sky-500 dark:text-ctp-peach">${proj.title}</h3>`
+  const title = `<h3 class="text-2xl md:text-3xl text-sky-500 dark:text-ctp-peach text-center sm:text-left">${proj.title}</h3>`
 
   const description = `<p class="text-base mb-3 text-sky-800 dark:text-slate-100">${proj.description}</p>`
 
   const tech = `
-    <ul class="tech-tags flex gap-2 flex-wrap mt-2">
+    <ul class="tech-tags flex gap-2 flex-wrap mt-2 justify-center sm:justify-start">
       ${proj.tech.map(t => `<li>${t}</li>`).join('')}
     </ul>
   `
 
   const learnMore = `
-    <div class="learn-more mt-2 cursor-pointer w-fit inline-flex items-center gap-2 text-sky-500 dark:text-ctp-peach text-lg font-semibold border-b border-sky-700/40 dark:border-ctp-peach/40 pb-0.5  hover:border-sky-900 dark:hover:border-ctp-peach hover:gap-3 transition-all duration-200">
+    <div class="learn-more text-md sm:text-lg mt-2 cursor-pointer w-fit inline-flex items-center gap-2 text-sky-500 dark:text-ctp-peach font-semibold border-b border-sky-700/40 dark:border-ctp-peach/40 pb-0.5  hover:border-sky-900 dark:hover:border-ctp-peach hover:gap-3 transition-all duration-200">
       Learn More
       <i data-lucide="arrow-down" class="w-4 h-4"></i>
     </div>
@@ -67,11 +67,10 @@ export function renderProjCard(proj) {
   `
 
   const projInfo = `
-  <div class="
-    proj-info flex flex-col gap-4
-    order-1
-    ${proj.side === 'left' ? 'md:order-1' : 'md:order-2'}
-  ">
+    <div class="proj-info flex flex-col gap-4 items-center md:items-start
+      order-1
+      ${proj.side === 'left' ? 'md:order-1' : 'md:order-2'}
+    ">
     ${title}
     ${tech}
     ${learnMore}
@@ -116,14 +115,14 @@ export function renderProjCard(proj) {
 
 
   return `
-  <div class="
-    proj group mt-16 px-17 py-2 lg:py-10 md:mt-12
-    grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20
-    items-start cursor-pointer
-
-    transition-all duration-300 ease-out
-    hover:shadow-2xl rounded-2xl p-6 hover:-translate-y-2 
-  ">
+    <div class="
+      proj group py-2 lg:py-10 mt-10 md:mt-12
+      px-0 md:px-17
+      grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20
+      items-center cursor-pointer
+      transition-all duration-300 ease-out
+      hover:shadow-2xl rounded-2xl p-6 hover:-translate-y-2 
+    ">
     ${projInfo}
     ${image}
   </div>

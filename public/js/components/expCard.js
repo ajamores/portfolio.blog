@@ -10,12 +10,12 @@ export function renderExpCard(exp) {
   return `
     <div class="exp relative ${exp.id >= 2 ? 'mt-5' : ''} bg-sky-500/60 dark:bg-ctp-mantle p-7 rounded-2xl border border-ctp-peach/50 shadow-[0_0_15px_rgba(250,179,135,0.2)] ${exp.side === 'left' ? 'md:mr-10' : 'md:ml-10'}">
      <div class="absolute -left-8.25 top-8 w-3 h-3 rounded-full mt-15 bg-ctp-peach md:hidden"></div>   
-    <div class="flex gap-12 items-start">
+    <div class="flex gap-2 sm:gap-12 items-start">
         <div class="flex-1">
-          <h3 class="text-sm md:text-md lg:text-xl xl:text-2xl font-bold mb-1">${exp.title}</h3>
-          <p class="lg:text-md xl:text-lg font-semibold text-sky-200 dark:text-ctp-peach">${exp.company === '' ? '' : '@'} ${exp.company}</p>
-          <span class=" text-sky-200 dark:text-ctp-peach text-lg">${exp.date}</span>
-          <p class="mt-4 lg:text-sm xl:text-md">${exp.summary}</p>
+          <h3 class="text-md md:text-md lg:text-xl xl:text-2xl font-bold mb-1">${exp.title}</h3>
+          <p class="text-sm sm::text-md xl:text-lg font-semibold text-sky-200 dark:text-ctp-peach">${exp.company === '' ? '' : '@'} ${exp.company}</p>
+          <span class=" text-sky-200 dark:text-ctp-peach text-sm md:text-lg">${exp.date}</span>
+          <p class="mt-4 text-sm lg:text-sm xl:text-md">${exp.summary}</p>
           <div class="info hidden mt-5">
             <hr class="mb-4">
             <ul id=class="space-y-3 mt-4">${bullets}</ul>

@@ -138,3 +138,5 @@ dist
 .pnp.*
 
 /src/generated/prisma
+
+/public/css/style.css
