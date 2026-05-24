@@ -33,6 +33,23 @@ document.addEventListener('mousemove', (e) => {
     document.documentElement.style.setProperty('--spotlight-y', `${e.clientY}px`);
 });
 
+const image = document.getElementById('image')
+const video = document.getElementById('hero-video')
+const img = document.getElementById('hero-img')
+
+// preload first frame
+video.load()
+
+image.addEventListener('click', () => {
+  video.currentTime = 0
+  video.play()
+  img.classList.add('opacity-0')
+})
+
+video.addEventListener('ended', () => {
+  img.classList.remove('opacity-0')
+})
+
 // Animate all section headings on scroll
 const sections = ['skills', 'experience', 'projects', 'latest-blogs'];
 
@@ -123,57 +140,6 @@ const heroObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 heroObserver.observe(document.getElementById('hero'));
-
-// const comets = document.querySelectorAll('.comet-pair');
-
-// comets.forEach((pair, i) => {
-//     const thick = pair.querySelector('.thick');
-//     const thin = pair.querySelector('.thin');
-
-//     let angle = (360 / comets.length) * i;
-//     let speed = 0;
-//     let targetSpeed = 1.2;
-//     let direction = 1;
-//     let dashLength = 80;
-//     let phase = 'growing';
-//     let frameCount = i * 200; // offset each comet's random check
-
-//     function animate() {
-//         frameCount++;
-//         speed += (targetSpeed - speed) * 0.02;
-//         angle += speed * direction;
-
-//         if (phase === 'growing') {
-//             dashLength = Math.min(80, dashLength + 0.8);
-
-//             // stagger the random trigger per comet using frameCount
-//             if (dashLength >= 80 && frameCount % 300 === 0 && Math.random() < 0.3) {
-//                 phase = 'shrinking';
-//                 targetSpeed = 0;
-//                 frameCount = 0;
-//             }
-//         }
-
-//         if (phase === 'shrinking') {
-//             dashLength = Math.max(5, dashLength - 0.5);
-
-//             if (speed < 0.01 && dashLength <= 5) {
-//                 direction *= -1;
-//                 phase = 'growing';
-//                 targetSpeed = 1.4;
-//             }
-//         }
-
-//         thick.setAttribute('stroke-dasharray', `${dashLength} 1500`);
-//         thin.setAttribute('stroke-dasharray', `${dashLength * 0.5} 1500`);
-//         thick.style.transform = `rotate(${angle}deg)`;
-//         thin.style.transform = `rotate(${angle}deg)`;
-
-//         requestAnimationFrame(animate);
-//     }
-
-//     animate();
-// });
 
 
 document.querySelectorAll('.skill-list').forEach(list => {
