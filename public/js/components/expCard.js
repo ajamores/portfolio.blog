@@ -1,7 +1,7 @@
 export function renderExpCard(exp) {
 
   const bullets = exp.bullets.map((b, i) => `
-    <li class="flex items-start gap-2 lg:text-sm xl:text-md" style="animation-delay: ${i * 60}ms">
+    <li class="flex items-start gap-2 text-xs sm:text-sm xl:text-md" style="animation-delay: ${i * 60}ms">
         <span class="w-1.5 h-1.5 rounded-full bg-ctp-peach mt-2 shrink-0"></span>
         <p>${b}</p>
     </li>

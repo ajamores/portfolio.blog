@@ -1,7 +1,7 @@
 export const experiences = [
 
     {
-        id: 4,
+        id: 1,
         type: 'work',
         title: 'Founder & Web Developer (Freelance)',
         company: 'Escarpment Web Design',
@@ -15,7 +15,7 @@ export const experiences = [
         side: 'left'
     },
     {
-        id: 1,
+        id: 2,
         type: 'work',
         title: 'Software Developer (Co-Op)',
         company: 'Procor Limited',
@@ -29,7 +29,7 @@ export const experiences = [
         side: 'right'
     },
     {
-        id: 2,
+        id: 3,
         type: 'work',
         title: 'QA Analyst (Co-Op)',
         company: 'Procor Limited',
@@ -44,7 +44,7 @@ export const experiences = [
         side: 'left'
     },
     {
-        id: 3,
+        id: 4,
         type: 'work',
         title: 'Personal Banker',
         company: 'Bank of Montreal',

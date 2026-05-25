@@ -2,7 +2,7 @@ export function renderProjCard(proj) {
 
   const title = `<h3 class="text-2xl md:text-3xl text-sky-500 dark:text-ctp-peach text-center sm:text-left">${proj.title}</h3>`
 
-  const description = `<p class="text-sm sm:text-base mb-3 text-sky-800 dark:text-slate-100">${proj.description}</p>`
+  const description = `<p class="text-xs sm:text-base mb-3 text-sky-800 dark:text-slate-100">${proj.description}</p>`
 
   const tech = `
     <ul class="tech-tags flex gap-2 flex-wrap mt-2 justify-center sm:justify-start">
@@ -20,7 +20,7 @@ export function renderProjCard(proj) {
   const bullets = proj.bullets.map(b => `
     <li class="flex items-start gap-2" >
       <span class="w-1.5 h-1.5 rounded-full bg-sky-900 dark:bg-ctp-peach mt-2 shrink-0"></span>
-      <p class="dark:text-white text-sky-900 text-sm sm:text-base ">${b}</p>
+      <p class="dark:text-white text-sky-900 text-xs sm:text-base ">${b}</p>
     </li>
   `).join('')
 
