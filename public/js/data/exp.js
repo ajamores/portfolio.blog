@@ -6,11 +6,11 @@ export const experiences = [
         title: 'Founder & Web Developer (Freelance)',
         company: 'Escarpment Web Design',
         date: '05/2026 - Present',
-        summary: 'stepping into freelance — building websites and local SEO solutions for Hamilton small businesses',
+        summary: 'taking the leap into freelance, building websites and local SEO solutions for small businesses in Hamilton',
         bullets: [
-            'currently building escarpmentwebdesign.com — coming soon',
-            'targeting local Hamilton businesses with outdated or missing web presence',
-            'focused on clean, fast sites with real Google visibility'
+            'currently building escarpmentwebdesign.com',
+            'targeting local restaurants, gyms, trades, and professionals with outdated or missing web presence',
+            'focused on clean fast sites with real Google visibility'
         ],
         side: 'left'
     },
