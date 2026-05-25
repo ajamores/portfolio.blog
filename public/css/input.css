@@ -91,8 +91,12 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  background: #fab387;
+  background: var(--color-sky-500);
   transition: width 0.5s ease;
+}
+
+.dark #navbar a::after {
+  background: #fab387;
 }
 
 #navbar a:hover::after {
@@ -106,10 +110,15 @@ body {
 
 #navbar a:hover,
 #navbar button:hover {
-  color: #fab387;
+  color: var(--color-sky-500);
   /* text-shadow: 0 0 12px rgba(250, 179, 135, 0.1); */
   transform: scale(1.05);
   transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.dark #navbar a:hover,
+.dark #navbar button:hover {
+  color: #fab387;
 }
 
 @keyframes fadeUp {

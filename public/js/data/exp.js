@@ -1,4 +1,19 @@
 export const experiences = [
+
+    {
+        id: 4,
+        type: 'work',
+        title: 'Founder & Web Developer (Freelance)',
+        company: 'Escarpment Web Design',
+        date: '05/2026 - Present',
+        summary: 'stepping into freelance — building websites and local SEO solutions for Hamilton small businesses',
+        bullets: [
+            'currently building escarpmentwebdesign.com — coming soon',
+            'targeting local Hamilton businesses with outdated or missing web presence',
+            'focused on clean, fast sites with real Google visibility'
+        ],
+        side: 'left'
+    },
     {
         id: 1,
         type: 'work',
@@ -11,7 +26,7 @@ export const experiences = [
             'got thrown into a production Java codebase and figured it out',
             'presented end-of-term project to engineering stakeholders across Canadian and US offices'
         ],
-        side: 'left'
+        side: 'right'
     },
     {
         id: 2,
@@ -26,7 +41,7 @@ export const experiences = [
             'helped migrate legacy ETL pipelines to Apache Kafka for real-time event streaming',
             'built proper onboarding docs in Confluence so the next co-ops didn\'t have to learn from Udemy videos like I did',
         ],
-        side: 'right'
+        side: 'left'
     },
     {
         id: 3,
@@ -41,7 +56,7 @@ export const experiences = [
             'consistently met sales targets while keeping the human side of banking intact'
 
         ],
-        side: 'left'
+        side: 'right'
     },
     {
         id: 4,
