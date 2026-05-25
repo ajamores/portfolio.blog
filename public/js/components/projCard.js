@@ -2,7 +2,7 @@ export function renderProjCard(proj) {
 
   const title = `<h3 class="text-2xl md:text-3xl text-sky-500 dark:text-ctp-peach text-center sm:text-left">${proj.title}</h3>`
 
-  const description = `<p class="text-base mb-3 text-sky-800 dark:text-slate-100">${proj.description}</p>`
+  const description = `<p class="text-sm sm:text-base mb-3 text-sky-800 dark:text-slate-100">${proj.description}</p>`
 
   const tech = `
     <ul class="tech-tags flex gap-2 flex-wrap mt-2 justify-center sm:justify-start">
@@ -20,7 +20,7 @@ export function renderProjCard(proj) {
   const bullets = proj.bullets.map(b => `
     <li class="flex items-start gap-2" >
       <span class="w-1.5 h-1.5 rounded-full bg-sky-900 dark:bg-ctp-peach mt-2 shrink-0"></span>
-      <p class="dark:text-white text-sky-900 text-base ">${b}</p>
+      <p class="dark:text-white text-sky-900 text-sm sm:text-base ">${b}</p>
     </li>
   `).join('')
 
@@ -42,7 +42,7 @@ export function renderProjCard(proj) {
   const projDetails = `
     <div class="proj-details  mt-4 p-5 bg-sky-50 dark:bg-ctp-mantle/70 rounded-xl border border-sky-200 dark:border-ctp-peach/20">
       ${description}
-      <h4 class="text-sky-600 dark:text-ctp-peach font-semibold text-lg mb-2">Key Features</h4>
+      <h4 class="text-sky-600 dark:text-ctp-peach font-semibold text-md sm:text-lg mb-2">Key Features</h4>
       <ul id="tech-tags" class="space-y-2 text-sm">
         ${bullets}
       </ul>
