@@ -41,7 +41,7 @@ export const projects = [
         tech: ['Python', 'YOLOv11', 'AI', 'Computer Vision', 'Machine Learning'],
         bullets: [
             'Ran an experiment testing the model on unseen Halifax Bomber plane footage, successfully identifying the aircraft using our trained dataset',
-            'Built and managed the training dataset using a specialized annotation tool — labeling every plane for a 1000+ images',
+            'Built and managed the training dataset using a specialized annotation tool — labeling every plane for over 1000+ images',
             'Achieved roughly 20% gains in mAP50, precision and recall over two semesters work',
         ],
         image: '/images/plane1.webp',

@@ -40,15 +40,30 @@ const img = document.getElementById('hero-img')
 // preload first frame
 video.load()
 
-image.addEventListener('click', () => {
-  video.currentTime = 0
-  video.play()
-  img.classList.add('opacity-0')
-})
+let isPlaying = false;
+
+image.addEventListener('click', async () => {
+  if (isPlaying) return;
+
+  isPlaying = true;
+
+  img.classList.add('opacity-0');
+
+  video.currentTime = 0;
+
+  try {
+    await video.play();
+  } catch (e) {
+    isPlaying = false;
+    img.classList.remove('opacity-0');
+  }
+});
 
 video.addEventListener('ended', () => {
-  img.classList.remove('opacity-0')
-})
+  img.classList.remove('opacity-0');
+  isPlaying = false;
+});
+
 
 // Animate all section headings on scroll
 const sections = ['skills', 'experience', 'projects', 'latest-blogs'];
