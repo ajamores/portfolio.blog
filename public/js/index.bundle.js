@@ -440,7 +440,7 @@ var renderNavBar = () => {
                 <a href="/" class="group w-fit my-auto">
                     <h1
                         class=" nav-icon relative inline-block font-semibold text-xl sm:text-2xl tracking-wide 
-                        text-sky-500 dark:text-ctp-peach
+                        text-sky-600 dark:text-ctp-peach
                         transition-all duration-300 ease-out
                         group-hover:tracking-widest
                         group-hover:drop-shadow-[0_0_12px_rgba(56,189,248,0.55)]
@@ -451,13 +451,13 @@ var renderNavBar = () => {
                         <span
                             class="absolute left-1/2 -translate-x-1/2 -bottom-1
                             h-0.5 w-0
-                            bg-sky-500 dark:bg-ctp-peach
+                            bg-sky-600 dark:bg-ctp-peach
                             transition-all duration-300 ease-out
                             group-hover:w-full">
                         </span>
                     </h1>
                 </a>
-                <nav class="  nav-links gap-4 text-xl flex items-center text-sky-600 dark:text-white" id="navbar">
+                <nav class="  nav-links gap-4 text-xl flex items-center text-sky-700 dark:text-white" id="navbar">
                     <a href="/" class="hidden md:flex">Home</a>
                     <a href="/#skills" class="hidden md:flex ">Skills</a>
                     <a href="/#experience" class="hidden md:flex ">Experience</a>

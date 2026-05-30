@@ -1323,6 +1323,9 @@
       background-color: color-mix(in oklab, var(--color-sky-500) 60%, transparent);
     }
   }
+  .bg-sky-600 {
+    background-color: var(--color-sky-600);
+  }
   .bg-sky-700 {
     background-color: var(--color-sky-700);
   }
