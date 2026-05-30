@@ -2683,6 +2683,12 @@
       }
     }
   }
+  .dark\:invert {
+    &:where(.dark, .dark *) {
+      --tw-invert: invert(100%);
+      filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+    }
+  }
   .dark\:group-hover\:drop-shadow-\[0_0_14px_rgba\(250\,179\,135\,0\.45\)\] {
     &:where(.dark, .dark *) {
       &:is(:where(.group):hover *) {
