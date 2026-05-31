@@ -1,7 +1,7 @@
 export const renderNavBar = () => {
 
     return `
-        <header class="fixed top-0 left-0 right-0 py-4 shadow-1xl backdrop-blur-sm z-10 text-white bg-white/80 dark:bg-slate-900/80">
+        <header class="fixed top-0 left-0 right-0 py-4 shadow-1xl backdrop-blur-sm z-10 text-white ">
             <div class=" max-w-6xl mx-auto flex justify-between px-4 sm:px-6">
                 <a href="/" class="group w-fit my-auto">
                     <h1
@@ -23,7 +23,7 @@ export const renderNavBar = () => {
                         </span>
                     </h1>
                 </a>
-                <nav class="  nav-links gap-4 text-xl flex items-center text-sky-500 dark:text-white" id="navbar">
+                <nav class="  nav-links gap-4 text-xl flex items-center text-sky-600 dark:text-white" id="navbar">
                     <a href="/" class="hidden md:flex">Home</a>
                     <a href="/#skills" class="hidden md:flex ">Skills</a>
                     <a href="/#experience" class="hidden md:flex ">Experience</a>
