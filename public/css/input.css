@@ -1095,6 +1095,11 @@ body {
     font-size: 0.8rem;
     padding: 0.25rem 0.65rem;
   }
+
+  .dateTime time, .dateTime span{
+    font-size: 0.9rem;
+  }
+
 }
 
 
