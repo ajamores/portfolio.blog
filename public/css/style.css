@@ -2935,7 +2935,6 @@ body {
 }
 #hero-text>* {
   opacity: 0;
-  animation: fadeUp 0.6s ease forwards;
 }
 @keyframes orbit {
   from {
@@ -2976,8 +2975,6 @@ body {
 }
 #image-wrapper {
   opacity: 0;
-  animation: fadeUp 0.8s ease forwards;
-  animation-delay: 0.4s;
 }
 .comet-pair circle {
   stroke: oklch(73.291% 0.15362 236.831);

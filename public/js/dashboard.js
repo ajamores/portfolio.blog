@@ -1,6 +1,6 @@
-
+import { initIcons } from './utils.js';
 import { logout } from './api.js';
-import { getAllBlogPosts } from '/js/api.js'
+import { getAllBlogPosts } from './api.js'
 
 const postData = await getAllBlogPosts();
 console.log(postData);

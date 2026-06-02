@@ -8,8 +8,6 @@
     <meta name="description"
         content="Welcome to my software developer portfolio. I&rsquo;m Armand, and this site showcases the projects, technologies, experiences, and blog posts I&rsquo;ve spent countless hours building and learning from.">
     <link rel="stylesheet" href="/css/style.css" />
-    <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script type="module" src="/js/theme.js"></script>
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
 </head>
 
@@ -156,7 +154,7 @@
                             <source src="/images/aiwave.webm" type="video/webm" />
                             <source src="/images/aiwave.mp4" type="video/mp4" />
                         </video>
-                        <img src="/images/aipic.webp" alt="aipicofme" width="383" height="383" id="hero-img"
+                        <img src="/images/aipic.webp" alt="aipicofme" width="383" height="383" id="hero-img" fetchpriority="high"
                             class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 z-10" />
                         <div
                             class="absolute inset-0 z-20 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

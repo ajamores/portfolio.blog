@@ -1,5 +1,5 @@
+import { initIcons } from './utils.js';
 import EditorJS from '@editorjs/editorjs';
-
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import Quote from '@editorjs/quote';
@@ -207,4 +207,4 @@ deleteBtn.addEventListener('click', async () => {
   }
 });
 
-lucide.createIcons();
+initIcons();

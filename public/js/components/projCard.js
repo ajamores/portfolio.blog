@@ -1,6 +1,6 @@
 export function renderProjCard(proj) {
 
-  const title = `<h3 class="text-2xl md:text-3xl text-sky-500 dark:text-ctp-peach text-center sm:text-left">${proj.title}</h3>`
+  const title = `<h3 class="font-bold text-2xl md:text-3xl text-sky-500 dark:text-ctp-peach text-center sm:text-left">${proj.title}</h3>`
 
   const description = `<p class="text-xs sm:text-base mb-3 text-sky-800 dark:text-slate-100">${proj.description}</p>`
 

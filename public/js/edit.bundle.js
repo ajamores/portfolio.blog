@@ -1,3 +1,280 @@
+// node_modules/lucide/dist/esm/defaultAttributes.mjs
+var defaultAttributes = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-width": 2,
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round"
+};
+
+// node_modules/lucide/dist/esm/createElement.mjs
+var createSVGElement = ([tag, attrs, children]) => {
+  const element = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  Object.keys(attrs).forEach((name) => {
+    element.setAttribute(name, String(attrs[name]));
+  });
+  if (children?.length) {
+    children.forEach((child) => {
+      const childElement = createSVGElement(child);
+      element.appendChild(childElement);
+    });
+  }
+  return element;
+};
+var createElement = (iconNode, customAttrs = {}) => {
+  const tag = "svg";
+  const attrs = {
+    ...defaultAttributes,
+    ...customAttrs
+  };
+  return createSVGElement([tag, attrs, iconNode]);
+};
+
+// node_modules/lucide/dist/esm/shared/src/utils/hasA11yProp.mjs
+var hasA11yProp = (props) => {
+  for (const prop in props) {
+    if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
+      return true;
+    }
+  }
+  return false;
+};
+
+// node_modules/lucide/dist/esm/shared/src/utils/mergeClasses.mjs
+var mergeClasses = (...classes) => classes.filter((className, index, array) => {
+  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+}).join(" ").trim();
+
+// node_modules/lucide/dist/esm/shared/src/utils/toCamelCase.mjs
+var toCamelCase = (string) => string.replace(
+  /^([A-Z])|[\s-_]+(\w)/g,
+  (match, p1, p22) => p22 ? p22.toUpperCase() : p1.toLowerCase()
+);
+
+// node_modules/lucide/dist/esm/shared/src/utils/toPascalCase.mjs
+var toPascalCase = (string) => {
+  const camelCase = toCamelCase(string);
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+
+// node_modules/lucide/dist/esm/replaceElement.mjs
+var getAttrs = (element) => Array.from(element.attributes).reduce((attrs, attr) => {
+  attrs[attr.name] = attr.value;
+  return attrs;
+}, {});
+var getClassNames = (attrs) => {
+  if (typeof attrs === "string") return attrs;
+  if (!attrs || !attrs.class) return "";
+  if (attrs.class && typeof attrs.class === "string") {
+    return attrs.class.split(" ");
+  }
+  if (attrs.class && Array.isArray(attrs.class)) {
+    return attrs.class;
+  }
+  return "";
+};
+var replaceElement = (element, { nameAttr, icons, attrs }) => {
+  const iconName = element.getAttribute(nameAttr);
+  if (iconName == null) return;
+  const ComponentName = toPascalCase(iconName);
+  const iconNode = icons[ComponentName];
+  if (!iconNode) {
+    return console.warn(
+      `${element.outerHTML} icon name was not found in the provided icons object.`
+    );
+  }
+  const elementAttrs = getAttrs(element);
+  const ariaProps = hasA11yProp(elementAttrs) ? {} : { "aria-hidden": "true" };
+  const iconAttrs = {
+    ...defaultAttributes,
+    "data-lucide": iconName,
+    ...ariaProps,
+    ...attrs,
+    ...elementAttrs
+  };
+  const elementClassNames = getClassNames(elementAttrs);
+  const className = getClassNames(attrs);
+  const classNames = mergeClasses(
+    "lucide",
+    `lucide-${iconName}`,
+    ...elementClassNames,
+    ...className
+  );
+  if (classNames) {
+    Object.assign(iconAttrs, {
+      class: classNames
+    });
+  }
+  const svgElement = createElement(iconNode, iconAttrs);
+  return element.parentNode?.replaceChild(svgElement, element);
+};
+
+// node_modules/lucide/dist/esm/icons/arrow-down.mjs
+var ArrowDown = [
+  ["path", { d: "M12 5v14" }],
+  ["path", { d: "m19 12-7 7-7-7" }]
+];
+
+// node_modules/lucide/dist/esm/icons/arrow-left.mjs
+var ArrowLeft = [
+  ["path", { d: "m12 19-7-7 7-7" }],
+  ["path", { d: "M19 12H5" }]
+];
+
+// node_modules/lucide/dist/esm/icons/arrow-right.mjs
+var ArrowRight = [
+  ["path", { d: "M5 12h14" }],
+  ["path", { d: "m12 5 7 7-7 7" }]
+];
+
+// node_modules/lucide/dist/esm/icons/arrow-up.mjs
+var ArrowUp = [
+  ["path", { d: "m5 12 7-7 7 7" }],
+  ["path", { d: "M12 19V5" }]
+];
+
+// node_modules/lucide/dist/esm/icons/calendar.mjs
+var Calendar = [
+  ["path", { d: "M8 2v4" }],
+  ["path", { d: "M16 2v4" }],
+  ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2" }],
+  ["path", { d: "M3 10h18" }]
+];
+
+// node_modules/lucide/dist/esm/icons/chevron-down.mjs
+var ChevronDown = [["path", { d: "m6 9 6 6 6-6" }]];
+
+// node_modules/lucide/dist/esm/icons/clock.mjs
+var Clock = [
+  ["circle", { cx: "12", cy: "12", r: "10" }],
+  ["path", { d: "M12 6v6l4 2" }]
+];
+
+// node_modules/lucide/dist/esm/icons/external-link.mjs
+var ExternalLink = [
+  ["path", { d: "M15 3h6v6" }],
+  ["path", { d: "M10 14 21 3" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" }]
+];
+
+// node_modules/lucide/dist/esm/icons/map-pin.mjs
+var MapPin = [
+  [
+    "path",
+    {
+      d: "M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+    }
+  ],
+  ["circle", { cx: "12", cy: "10", r: "3" }]
+];
+
+// node_modules/lucide/dist/esm/icons/menu.mjs
+var Menu = [
+  ["path", { d: "M4 5h16" }],
+  ["path", { d: "M4 12h16" }],
+  ["path", { d: "M4 19h16" }]
+];
+
+// node_modules/lucide/dist/esm/icons/moon.mjs
+var Moon = [
+  [
+    "path",
+    {
+      d: "M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
+    }
+  ]
+];
+
+// node_modules/lucide/dist/esm/icons/save.mjs
+var Save = [
+  [
+    "path",
+    {
+      d: "M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
+    }
+  ],
+  ["path", { d: "M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" }],
+  ["path", { d: "M7 3v4a1 1 0 0 0 1 1h7" }]
+];
+
+// node_modules/lucide/dist/esm/icons/sun.mjs
+var Sun = [
+  ["circle", { cx: "12", cy: "12", r: "4" }],
+  ["path", { d: "M12 2v2" }],
+  ["path", { d: "M12 20v2" }],
+  ["path", { d: "m4.93 4.93 1.41 1.41" }],
+  ["path", { d: "m17.66 17.66 1.41 1.41" }],
+  ["path", { d: "M2 12h2" }],
+  ["path", { d: "M20 12h2" }],
+  ["path", { d: "m6.34 17.66-1.41 1.41" }],
+  ["path", { d: "m19.07 4.93-1.41 1.41" }]
+];
+
+// node_modules/lucide/dist/esm/icons/trash-2.mjs
+var Trash2 = [
+  ["path", { d: "M10 11v6" }],
+  ["path", { d: "M14 11v6" }],
+  ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" }],
+  ["path", { d: "M3 6h18" }],
+  ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" }]
+];
+
+// node_modules/lucide/dist/esm/icons/x.mjs
+var X = [
+  ["path", { d: "M18 6 6 18" }],
+  ["path", { d: "m6 6 12 12" }]
+];
+
+// node_modules/lucide/dist/esm/lucide.mjs
+var createIcons = ({
+  icons = {},
+  nameAttr = "data-lucide",
+  attrs = {},
+  root = document,
+  inTemplates
+} = {}) => {
+  if (!Object.values(icons).length) {
+    throw new Error(
+      "Please provide an icons object.\nIf you want to use all the icons you can import it like:\n `import { createIcons, icons } from 'lucide';\nlucide.createIcons({icons});`"
+    );
+  }
+  if (typeof root === "undefined") {
+    throw new Error("`createIcons()` only works in a browser environment.");
+  }
+  const elementsToReplace = Array.from(root.querySelectorAll(`[${nameAttr}]`));
+  elementsToReplace.forEach((element) => replaceElement(element, { nameAttr, icons, attrs }));
+  if (inTemplates) {
+    const templates = Array.from(root.querySelectorAll("template"));
+    templates.forEach(
+      (template) => createIcons({
+        icons,
+        nameAttr,
+        attrs,
+        root: template.content,
+        inTemplates
+      })
+    );
+  }
+  if (nameAttr === "data-lucide") {
+    const deprecatedElements = root.querySelectorAll("[icon-name]");
+    if (deprecatedElements.length > 0) {
+      console.warn(
+        "[Lucide] Some icons were found with the now deprecated icon-name attribute. These will still be replaced for backwards compatibility, but will no longer be supported in v1.0 and you should switch to data-lucide"
+      );
+      Array.from(deprecatedElements).forEach(
+        (element) => replaceElement(element, { nameAttr: "icon-name", icons, attrs })
+      );
+    }
+  }
+};
+
+// public/js/utils.js
+var initIcons = () => createIcons({ icons: { Sun, Moon, Menu, X, MapPin, ArrowDown, ArrowUp, ArrowRight, ArrowLeft, ExternalLink, ChevronDown, Calendar, Clock, Save, Trash2 } });
+
 // node_modules/@editorjs/editorjs/dist/editorjs.mjs
 (function() {
   "use strict";
@@ -154,7 +431,7 @@ function Zn(n2) {
   Ie.logLevel = n2;
 }
 var S = Ie.bind(window, false);
-var X = Ie.bind(window, true);
+var X2 = Ie.bind(window, true);
 function le(n2) {
   return Object.prototype.toString.call(n2).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
 }
@@ -280,7 +557,7 @@ function si(n2 = "") {
 }
 function ht(n2, e, t) {
   const o4 = `\xAB${e}\xBB is deprecated and will be removed in the next major release. Please use the \xAB${t}\xBB instead.`;
-  n2 && X(o4, "warn");
+  n2 && X2(o4, "warn");
 }
 function me(n2, e, t) {
   const o4 = t.value ? "value" : "get", i = t[o4], s4 = `#${e}Cache`;
@@ -2120,7 +2397,7 @@ var gi = class extends E {
   getBlockIndex(e) {
     const t = this.Editor.BlockManager.getBlockById(e);
     if (!t) {
-      X("There is no block with id `" + e + "`", "warn");
+      X2("There is no block with id `" + e + "`", "warn");
       return;
     }
     return this.Editor.BlockManager.getBlockIndex(t);
@@ -2133,7 +2410,7 @@ var gi = class extends E {
   getBlockByIndex(e) {
     const t = this.Editor.BlockManager.getBlockByIndex(e);
     if (t === void 0) {
-      X("There is no block at index `" + e + "`", "warn");
+      X2("There is no block at index `" + e + "`", "warn");
       return;
     }
     return new J(t);
@@ -2145,7 +2422,7 @@ var gi = class extends E {
    */
   getById(e) {
     const t = this.Editor.BlockManager.getBlockById(e);
-    return t === void 0 ? (X("There is no block with id `" + e + "`", "warn"), null) : new J(t);
+    return t === void 0 ? (X2("There is no block with id `" + e + "`", "warn"), null) : new J(t);
   }
   /**
    * Get Block API object by any child html element
@@ -2155,7 +2432,7 @@ var gi = class extends E {
   getBlockByElement(e) {
     const t = this.Editor.BlockManager.getBlock(e);
     if (t === void 0) {
-      X("There is no block corresponding to element `" + e + "`", "warn");
+      X2("There is no block corresponding to element `" + e + "`", "warn");
       return;
     }
     return new J(t);
@@ -2192,7 +2469,7 @@ var gi = class extends E {
       const t = this.Editor.BlockManager.getBlockByIndex(e);
       this.Editor.BlockManager.removeBlock(t);
     } catch (t) {
-      X(t, "warn");
+      X2(t, "warn");
       return;
     }
     this.Editor.BlockManager.blocks.length === 0 && this.Editor.BlockManager.insert(), this.Editor.BlockManager.currentBlock && this.Editor.Caret.setToBlock(this.Editor.BlockManager.currentBlock, this.Editor.Caret.positions.END), this.Editor.Toolbar.close();
@@ -2345,7 +2622,7 @@ var kt = class _kt extends E {
   get methods() {
     return {
       t: () => {
-        X("I18n.t() method can be accessed only from Tools", "warn");
+        X2("I18n.t() method can be accessed only from Tools", "warn");
       }
     };
   }
@@ -3005,7 +3282,7 @@ var Pi = class extends E {
    */
   save() {
     const e = "Editor's content can not be saved in read-only mode";
-    return this.Editor.ReadOnly.isEnabled ? (X(e, "warn"), Promise.reject(new Error(e))) : this.Editor.Saver.save();
+    return this.Editor.ReadOnly.isEnabled ? (X2(e, "warn"), Promise.reject(new Error(e))) : this.Editor.Saver.save();
   }
 };
 var Ni = class extends E {
@@ -3118,7 +3395,7 @@ var Fi = class extends E {
    */
   toggleBlockSettings(e) {
     if (this.Editor.BlockManager.currentBlockIndex === -1) {
-      X("Could't toggle the Toolbar because there is no block selected ", "warn");
+      X2("Could't toggle the Toolbar because there is no block selected ", "warn");
       return;
     }
     e ?? !this.Editor.BlockSettings.opened ? (this.Editor.Toolbar.moveAndOpen(), this.Editor.BlockSettings.open()) : this.Editor.BlockSettings.close();
@@ -3130,7 +3407,7 @@ var Fi = class extends E {
    */
   toggleToolbox(e) {
     if (this.Editor.BlockManager.currentBlockIndex === -1) {
-      X("Could't toggle the Toolbox because there is no block selected ", "warn");
+      X2("Could't toggle the Toolbox because there is no block selected ", "warn");
       return;
     }
     e ?? !this.Editor.Toolbar.toolbox.opened ? (this.Editor.Toolbar.moveAndOpen(), this.Editor.Toolbar.toolbox.open()) : this.Editor.Toolbar.toolbox.close();
@@ -9430,7 +9707,7 @@ var ga = class extends E {
         i.insert();
       else {
         const s4 = e.map(({ type: r2, data: a4, tunes: l2, id: c4 }) => {
-          o4.available.has(r2) === false && (X(`Tool \xAB${r2}\xBB is not found. Check 'tools' property at the Editor.js config.`, "warn"), a4 = this.composeStubDataForTool(r2, a4, c4), r2 = o4.stubTool);
+          o4.available.has(r2) === false && (X2(`Tool \xAB${r2}\xBB is not found. Check 'tools' property at the Editor.js config.`, "warn"), a4 = this.composeStubDataForTool(r2, a4, c4), r2 = o4.stubTool);
           let d4;
           try {
             d4 = i.composeBlock({
@@ -9498,7 +9775,7 @@ var ma = class extends E {
       const s4 = await Promise.all(i), r2 = await yt(s4, (a4) => t.blockTools.get(a4).sanitizeConfig);
       return this.makeOutput(r2);
     } catch (s4) {
-      X("Saving failed due to the Error %o", "error", s4);
+      X2("Saving failed due to the Error %o", "error", s4);
     }
   }
   /**
@@ -11915,14 +12192,14 @@ function Vt2(e) {
 function Yt2(e) {
   return S2(e) === "undefined";
 }
-function X2(e, ...t) {
+function X3(e, ...t) {
   if (!t.length)
     return e;
   const n2 = t.shift();
   if (M(e) && M(n2))
     for (const r2 in n2)
-      M(n2[r2]) ? (e[r2] === void 0 && Object.assign(e, { [r2]: {} }), X2(e[r2], n2[r2])) : Object.assign(e, { [r2]: n2[r2] });
-  return X2(e, ...t);
+      M(n2[r2]) ? (e[r2] === void 0 && Object.assign(e, { [r2]: {} }), X3(e[r2], n2[r2])) : Object.assign(e, { [r2]: n2[r2] });
+  return X3(e, ...t);
 }
 function Jt2(e, t, n2) {
   const r2 = `\xAB${t}\xBB is deprecated and will be removed in the next major release. Please use the \xAB${n2}\xBB instead.`;
@@ -11997,7 +12274,7 @@ var rn2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   capitalize: Rt2,
   copyTextToClipboard: qt2,
   debounce: Ut2,
-  deepMerge: X2,
+  deepMerge: X3,
   deprecationAssert: Jt2,
   getUserOS: Ue2,
   getValidUrl: Qt2,
@@ -14402,16 +14679,16 @@ function Bt3(e) {
   } });
 })(ge3);
 var K3 = {};
-var X3 = {};
-Object.defineProperty(X3, "__esModule", { value: true });
-X3.isElement = Ht3;
+var X4 = {};
+Object.defineProperty(X4, "__esModule", { value: true });
+X4.isElement = Ht3;
 var Dt3 = $3;
 function Ht3(e) {
   return (0, Dt3.isNumber)(e) ? false : !!e && !!e.nodeType && e.nodeType === Node.ELEMENT_NODE;
 }
 (function(e) {
   Object.defineProperty(e, "__esModule", { value: true }), e.isElement = void 0;
-  var t = X3;
+  var t = X4;
   Object.defineProperty(e, "isElement", { enumerable: true, get: function() {
     return t.isElement;
   } });
@@ -16144,8 +16421,38 @@ deleteBtn.addEventListener("click", async () => {
     console.log(error);
   }
 });
-lucide.createIcons();
+initIcons();
 /*! Bundled license information:
+
+lucide/dist/esm/defaultAttributes.mjs:
+lucide/dist/esm/createElement.mjs:
+lucide/dist/esm/shared/src/utils/hasA11yProp.mjs:
+lucide/dist/esm/shared/src/utils/mergeClasses.mjs:
+lucide/dist/esm/shared/src/utils/toCamelCase.mjs:
+lucide/dist/esm/shared/src/utils/toPascalCase.mjs:
+lucide/dist/esm/replaceElement.mjs:
+lucide/dist/esm/icons/arrow-down.mjs:
+lucide/dist/esm/icons/arrow-left.mjs:
+lucide/dist/esm/icons/arrow-right.mjs:
+lucide/dist/esm/icons/arrow-up.mjs:
+lucide/dist/esm/icons/calendar.mjs:
+lucide/dist/esm/icons/chevron-down.mjs:
+lucide/dist/esm/icons/clock.mjs:
+lucide/dist/esm/icons/external-link.mjs:
+lucide/dist/esm/icons/map-pin.mjs:
+lucide/dist/esm/icons/menu.mjs:
+lucide/dist/esm/icons/moon.mjs:
+lucide/dist/esm/icons/save.mjs:
+lucide/dist/esm/icons/sun.mjs:
+lucide/dist/esm/icons/trash-2.mjs:
+lucide/dist/esm/icons/x.mjs:
+lucide/dist/esm/lucide.mjs:
+  (**
+   * @license lucide v1.17.0 - ISC
+   *
+   * This source code is licensed under the ISC license.
+   * See the LICENSE file in the root directory of this source tree.
+   *)
 
 @editorjs/editorjs/dist/editorjs.mjs:
   (*!

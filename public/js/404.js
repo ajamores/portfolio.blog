@@ -1,3 +1,4 @@
+import { initIcons } from './utils.js';
 import { initThemeToggle } from './theme.js'
 import { renderNavBar } from './components/navBar.js'
 
@@ -20,9 +21,9 @@ menuBtn.addEventListener('click', () => {
   ? '<i data-lucide="menu"></i>'
   : '<i data-lucide="x"></i>';
 
-  lucide.createIcons();
+  initIcons();
 });
 
 
 
-lucide.createIcons();
+initIcons();

@@ -1,3 +1,4 @@
+import { initIcons } from './utils.js';
 import { initThemeToggle } from './theme.js'
 import { experiences } from './data/exp.js'
 import { renderExpCard } from './components/expCard.js'
@@ -6,8 +7,10 @@ import { renderProjCard } from './components/projCard.js'
 import { getAllPublishedBLogPosts } from './api.js'
 import { renderNavBar } from './components/navBar.js'
 
+
 //render nav
 const nav = document.getElementById('nav-mount').innerHTML = renderNavBar();
+initIcons();
 
 //toggle between light and dark mode
 initThemeToggle();
@@ -24,7 +27,7 @@ menuBtn.addEventListener('click', () => {
         ? '<i data-lucide="menu"></i>'
         : '<i data-lucide="x"></i>';
 
-    lucide.createIcons();
+    initIcons();
 });
 
 // Mouse glow logic
@@ -43,25 +46,25 @@ video.load()
 let isPlaying = false;
 
 image.addEventListener('click', async () => {
-  if (isPlaying) return;
+    if (isPlaying) return;
 
-  isPlaying = true;
+    isPlaying = true;
 
-  img.classList.add('opacity-0');
+    img.classList.add('opacity-0');
 
-  video.currentTime = 0;
+    video.currentTime = 0;
 
-  try {
-    await video.play();
-  } catch (e) {
-    isPlaying = false;
-    img.classList.remove('opacity-0');
-  }
+    try {
+        await video.play();
+    } catch (e) {
+        isPlaying = false;
+        img.classList.remove('opacity-0');
+    }
 });
 
 video.addEventListener('ended', () => {
-  img.classList.remove('opacity-0');
-  isPlaying = false;
+    img.classList.remove('opacity-0');
+    isPlaying = false;
 });
 
 
@@ -81,16 +84,12 @@ sections.forEach(id => {
     new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                if (heading) {
-                    heading.style.animation = 'none';
-                    heading.offsetHeight;
-                    heading.style.animation = 'fadeUp 0.6s ease forwards 0.1s';
-                }
-                if (subheading) {
-                    subheading.style.animation = 'none';
-                    subheading.offsetHeight;
-                    subheading.style.animation = 'fadeUp 0.6s ease forwards 0.25s';
-                }
+                if (heading) heading.style.animation = 'none';
+                if (subheading) subheading.style.animation = 'none';
+                requestAnimationFrame(() => {
+                    if (heading) heading.style.animation = 'fadeUp 0.6s ease forwards 0.1s';
+                    if (subheading) subheading.style.animation = 'fadeUp 0.6s ease forwards 0.25s';
+                });
             } else {
                 if (heading) { heading.style.opacity = '0'; heading.style.animation = 'none'; }
                 if (subheading) { subheading.style.opacity = '0'; subheading.style.animation = 'none'; }
@@ -99,18 +98,17 @@ sections.forEach(id => {
     }, { threshold: 0.1 }).observe(section);
 });
 
-// experience specific
 const expObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const btnContainer = document.getElementById('exp-btn-container');
             const expLayout = document.getElementById('exp-layout');
             btnContainer.style.animation = 'none';
-            btnContainer.offsetHeight;
-            btnContainer.style.animation = 'fadeUp 0.6s ease forwards 0.4s';
             expLayout.style.animation = 'none';
-            expLayout.offsetHeight;
-            expLayout.style.animation = 'fadeUp 0.6s ease forwards 0.55s';
+            requestAnimationFrame(() => {
+                btnContainer.style.animation = 'fadeUp 0.6s ease forwards 0.4s';
+                expLayout.style.animation = 'fadeUp 0.6s ease forwards 0.55s';
+            });
         } else {
             document.getElementById('exp-btn-container').style.opacity = '0';
             document.getElementById('exp-layout').style.opacity = '0';
@@ -136,13 +134,16 @@ const resetHeroAnimations = () => {
 const playHeroAnimations = () => {
     heroItems.forEach((el, i) => {
         el.style.animation = 'none';
-        el.offsetHeight; // force reflow
-        el.style.animation = `fadeUp 0.6s ease forwards ${0.1 + i * 0.15}s`;
     });
     imageWrapper.style.animation = 'none';
-    imageWrapper.offsetHeight;
-    imageWrapper.style.animation = 'fadeUp 0.8s ease forwards 0.4s';
+    requestAnimationFrame(() => {
+        heroItems.forEach((el, i) => {
+            el.style.animation = `fadeUp 0.6s ease forwards ${0.1 + i * 0.15}s`;
+        });
+        imageWrapper.style.animation = 'fadeUp 0.8s ease forwards 0.4s';
+    });
 };
+
 
 const heroObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -303,7 +304,7 @@ document.querySelectorAll('#exp-btns button').forEach(btn => {
         })
         // console.log(filteredExp);
         insertExp(filteredExp);
-        lucide.createIcons();
+        initIcons();
     });
 
 });
@@ -318,7 +319,7 @@ projects.forEach(proj => {
     container.innerHTML += renderProjCard(proj)
 })
 
-lucide.createIcons()
+initIcons();
 
 document.querySelectorAll('.learn-more').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -329,7 +330,7 @@ document.querySelectorAll('.learn-more').forEach(btn => {
         btn.innerHTML = isVisible
             ? 'Hide Details <i data-lucide="arrow-up" class="w-4 h-4"></i>'
             : 'Learn More <i data-lucide="arrow-down" class="w-4 h-4"></i>'
-        lucide.createIcons()
+        initIcons();
     })
 })
 const projObserver = new IntersectionObserver((entries) => {
@@ -337,10 +338,11 @@ const projObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             const card = entry.target;
             const index = [...document.querySelectorAll('#proj-container > *')].indexOf(card);
-            card.style.animation = 'none';
-            card.offsetHeight;
             const dir = index % 2 === 0 ? 'fadeLeft' : 'fadeRight';
-            card.style.animation = `${dir} 0.6s ease forwards`;
+            card.style.animation = 'none';
+            requestAnimationFrame(() => {
+                card.style.animation = `${dir} 0.6s ease forwards`;
+            });
         } else {
             entry.target.style.opacity = '0';
             entry.target.style.animation = 'none';
@@ -384,7 +386,7 @@ function stopAllVideos(except = null) {
         proj._playing = false;
     });
 
-    
+
 }
 
 document.querySelectorAll('.proj').forEach(proj => {
@@ -480,10 +482,11 @@ const blogObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             const card = entry.target;
             const index = [...document.querySelectorAll('#blogs > *')].indexOf(card);
-            card.style.animation = 'none';
-            card.offsetHeight;
             const dir = index % 2 === 0 ? 'fadeLeft' : 'fadeRight';
-            card.style.animation = `${dir} 0.6s ease forwards`;
+            card.style.animation = 'none';
+            requestAnimationFrame(() => {
+                card.style.animation = `${dir} 0.6s ease forwards`;
+            });
         } else {
             entry.target.style.opacity = '0';
             entry.target.style.animation = 'none';
@@ -504,8 +507,9 @@ new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             viewAllBtn.style.animation = 'none';
-            viewAllBtn.offsetHeight;
-            viewAllBtn.style.animation = 'fadeUp 0.6s ease forwards 0.3s';
+            requestAnimationFrame(() => {
+                viewAllBtn.style.animation = 'fadeUp 0.6s ease forwards 0.3s';
+            });
         } else {
             viewAllBtn.style.opacity = '0';
             viewAllBtn.style.animation = 'none';
@@ -516,4 +520,4 @@ new IntersectionObserver((entries) => {
 
 
 
-lucide.createIcons();
+initIcons();

@@ -1,3 +1,6 @@
+import { initIcons } from './utils.js';
+
+
 export const initThemeToggle = () => {
     const btn = document.getElementById('sunMoon')
     if (!btn) return  // pages without the button just skip
@@ -5,14 +8,14 @@ export const initThemeToggle = () => {
     // Set correct icon on load
     const isDarkOnLoad = document.documentElement.classList.contains('dark')
     btn.innerHTML = isDarkOnLoad ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';  
-    lucide.createIcons()
+    initIcons();
 
     btn.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark')
         localStorage.theme = isDark ? 'dark' : 'light'
 
         btn.innerHTML = isDark ? '<i data-lucide="sun"></i>':'<i data-lucide="moon"></i>';
-        lucide.createIcons()
+        initIcons();
     })
 }
 

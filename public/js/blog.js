@@ -1,4 +1,4 @@
-
+import { initIcons } from './utils.js';
 import { getAllPublishedBLogPosts } from './api.js'
 import { initThemeToggle } from './theme.js'
 import { renderNavBar } from './components/navBar.js';
@@ -159,7 +159,7 @@ const renderPosts = (filteredPosts) => {
 
   });
 
-  lucide.createIcons();
+  initIcons();
 }
 
 //default
@@ -206,12 +206,12 @@ menuBtn.addEventListener('click', () => {
   ? '<i data-lucide="menu"></i>'
   : '<i data-lucide="x"></i>';
 
-  lucide.createIcons();
+  initIcons();
 });
 
 
 
-lucide.createIcons();
+initIcons();
 
 
 

@@ -135,7 +135,7 @@ body {
 
 #hero-text>* {
   opacity: 0;
-  animation: fadeUp 0.6s ease forwards;
+  /* animation: fadeUp 0.6s ease forwards; */
 }
 
 @keyframes orbit {
@@ -158,8 +158,8 @@ body {
 
 #image-wrapper {
   opacity: 0;
-  animation: fadeUp 0.8s ease forwards;
-  animation-delay: 0.4s;
+  /* animation: fadeUp 0.8s ease forwards;
+  animation-delay: 0.4s; */
 }
 
 
@@ -343,6 +343,7 @@ body {
   color: #1e1e2e;
   box-shadow: 0 0 12px rgba(250, 179, 135, 0.3);
 }
+
 
 
 @keyframes fadeUp {

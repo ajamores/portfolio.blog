@@ -22,7 +22,10 @@
     "dev:js:index": "esbuild public/js/index.js --bundle --outfile=public/js/index.bundle.js --format=esm --watch --sourcemap",
     "dev:js:edit": "esbuild public/js/edit.js --bundle --outfile=public/js/edit.bundle.js --format=esm --watch --sourcemap",
     "dev:js:create": "esbuild public/js/create.js --bundle --outfile=public/js/create.bundle.js --format=esm --watch --sourcemap",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:css\" \"npm run dev:js:edit\" \"npm run dev:js:create\" \"npm run dev:js:index\"",
+    "dev:js:blog": "esbuild public/js/blog.js --bundle --outfile=public/js/blog.bundle.js --format=esm --watch --sourcemap",
+    "dev:js:post": "esbuild public/js/post.js --bundle --outfile=public/js/post.bundle.js --format=esm --watch --sourcemap",
+    "dev:js:dashboard": "esbuild public/js/dashboard.js --bundle --outfile=public/js/dashboard.bundle.js --format=esm --watch --sourcemap",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:css\" \"npm run dev:js:edit\" \"npm run dev:js:create\" \"npm run dev:js:index\" \"npm run dev:js:blog\" \"npm run dev:js:post\" \"npm run dev:js:dashboard\"",
     "seed:init": "node prisma/seed.js"
   },
   "dependencies": {
@@ -52,6 +55,7 @@
     "express-rate-limit": "^8.3.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
+    "lucide": "^1.17.0",
     "tailwindcss": "^4.2.2",
     "zod": "^4.3.6"
   },

@@ -1,15 +1,292 @@
+// node_modules/lucide/dist/esm/defaultAttributes.mjs
+var defaultAttributes = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-width": 2,
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round"
+};
+
+// node_modules/lucide/dist/esm/createElement.mjs
+var createSVGElement = ([tag, attrs, children]) => {
+  const element = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  Object.keys(attrs).forEach((name) => {
+    element.setAttribute(name, String(attrs[name]));
+  });
+  if (children?.length) {
+    children.forEach((child) => {
+      const childElement = createSVGElement(child);
+      element.appendChild(childElement);
+    });
+  }
+  return element;
+};
+var createElement = (iconNode, customAttrs = {}) => {
+  const tag = "svg";
+  const attrs = {
+    ...defaultAttributes,
+    ...customAttrs
+  };
+  return createSVGElement([tag, attrs, iconNode]);
+};
+
+// node_modules/lucide/dist/esm/shared/src/utils/hasA11yProp.mjs
+var hasA11yProp = (props) => {
+  for (const prop in props) {
+    if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
+      return true;
+    }
+  }
+  return false;
+};
+
+// node_modules/lucide/dist/esm/shared/src/utils/mergeClasses.mjs
+var mergeClasses = (...classes) => classes.filter((className, index, array) => {
+  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+}).join(" ").trim();
+
+// node_modules/lucide/dist/esm/shared/src/utils/toCamelCase.mjs
+var toCamelCase = (string) => string.replace(
+  /^([A-Z])|[\s-_]+(\w)/g,
+  (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
+);
+
+// node_modules/lucide/dist/esm/shared/src/utils/toPascalCase.mjs
+var toPascalCase = (string) => {
+  const camelCase = toCamelCase(string);
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+
+// node_modules/lucide/dist/esm/replaceElement.mjs
+var getAttrs = (element) => Array.from(element.attributes).reduce((attrs, attr) => {
+  attrs[attr.name] = attr.value;
+  return attrs;
+}, {});
+var getClassNames = (attrs) => {
+  if (typeof attrs === "string") return attrs;
+  if (!attrs || !attrs.class) return "";
+  if (attrs.class && typeof attrs.class === "string") {
+    return attrs.class.split(" ");
+  }
+  if (attrs.class && Array.isArray(attrs.class)) {
+    return attrs.class;
+  }
+  return "";
+};
+var replaceElement = (element, { nameAttr, icons, attrs }) => {
+  const iconName = element.getAttribute(nameAttr);
+  if (iconName == null) return;
+  const ComponentName = toPascalCase(iconName);
+  const iconNode = icons[ComponentName];
+  if (!iconNode) {
+    return console.warn(
+      `${element.outerHTML} icon name was not found in the provided icons object.`
+    );
+  }
+  const elementAttrs = getAttrs(element);
+  const ariaProps = hasA11yProp(elementAttrs) ? {} : { "aria-hidden": "true" };
+  const iconAttrs = {
+    ...defaultAttributes,
+    "data-lucide": iconName,
+    ...ariaProps,
+    ...attrs,
+    ...elementAttrs
+  };
+  const elementClassNames = getClassNames(elementAttrs);
+  const className = getClassNames(attrs);
+  const classNames = mergeClasses(
+    "lucide",
+    `lucide-${iconName}`,
+    ...elementClassNames,
+    ...className
+  );
+  if (classNames) {
+    Object.assign(iconAttrs, {
+      class: classNames
+    });
+  }
+  const svgElement = createElement(iconNode, iconAttrs);
+  return element.parentNode?.replaceChild(svgElement, element);
+};
+
+// node_modules/lucide/dist/esm/icons/arrow-down.mjs
+var ArrowDown = [
+  ["path", { d: "M12 5v14" }],
+  ["path", { d: "m19 12-7 7-7-7" }]
+];
+
+// node_modules/lucide/dist/esm/icons/arrow-left.mjs
+var ArrowLeft = [
+  ["path", { d: "m12 19-7-7 7-7" }],
+  ["path", { d: "M19 12H5" }]
+];
+
+// node_modules/lucide/dist/esm/icons/arrow-right.mjs
+var ArrowRight = [
+  ["path", { d: "M5 12h14" }],
+  ["path", { d: "m12 5 7 7-7 7" }]
+];
+
+// node_modules/lucide/dist/esm/icons/arrow-up.mjs
+var ArrowUp = [
+  ["path", { d: "m5 12 7-7 7 7" }],
+  ["path", { d: "M12 19V5" }]
+];
+
+// node_modules/lucide/dist/esm/icons/calendar.mjs
+var Calendar = [
+  ["path", { d: "M8 2v4" }],
+  ["path", { d: "M16 2v4" }],
+  ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2" }],
+  ["path", { d: "M3 10h18" }]
+];
+
+// node_modules/lucide/dist/esm/icons/chevron-down.mjs
+var ChevronDown = [["path", { d: "m6 9 6 6 6-6" }]];
+
+// node_modules/lucide/dist/esm/icons/clock.mjs
+var Clock = [
+  ["circle", { cx: "12", cy: "12", r: "10" }],
+  ["path", { d: "M12 6v6l4 2" }]
+];
+
+// node_modules/lucide/dist/esm/icons/external-link.mjs
+var ExternalLink = [
+  ["path", { d: "M15 3h6v6" }],
+  ["path", { d: "M10 14 21 3" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" }]
+];
+
+// node_modules/lucide/dist/esm/icons/map-pin.mjs
+var MapPin = [
+  [
+    "path",
+    {
+      d: "M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+    }
+  ],
+  ["circle", { cx: "12", cy: "10", r: "3" }]
+];
+
+// node_modules/lucide/dist/esm/icons/menu.mjs
+var Menu = [
+  ["path", { d: "M4 5h16" }],
+  ["path", { d: "M4 12h16" }],
+  ["path", { d: "M4 19h16" }]
+];
+
+// node_modules/lucide/dist/esm/icons/moon.mjs
+var Moon = [
+  [
+    "path",
+    {
+      d: "M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
+    }
+  ]
+];
+
+// node_modules/lucide/dist/esm/icons/save.mjs
+var Save = [
+  [
+    "path",
+    {
+      d: "M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
+    }
+  ],
+  ["path", { d: "M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" }],
+  ["path", { d: "M7 3v4a1 1 0 0 0 1 1h7" }]
+];
+
+// node_modules/lucide/dist/esm/icons/sun.mjs
+var Sun = [
+  ["circle", { cx: "12", cy: "12", r: "4" }],
+  ["path", { d: "M12 2v2" }],
+  ["path", { d: "M12 20v2" }],
+  ["path", { d: "m4.93 4.93 1.41 1.41" }],
+  ["path", { d: "m17.66 17.66 1.41 1.41" }],
+  ["path", { d: "M2 12h2" }],
+  ["path", { d: "M20 12h2" }],
+  ["path", { d: "m6.34 17.66-1.41 1.41" }],
+  ["path", { d: "m19.07 4.93-1.41 1.41" }]
+];
+
+// node_modules/lucide/dist/esm/icons/trash-2.mjs
+var Trash2 = [
+  ["path", { d: "M10 11v6" }],
+  ["path", { d: "M14 11v6" }],
+  ["path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" }],
+  ["path", { d: "M3 6h18" }],
+  ["path", { d: "M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" }]
+];
+
+// node_modules/lucide/dist/esm/icons/x.mjs
+var X = [
+  ["path", { d: "M18 6 6 18" }],
+  ["path", { d: "m6 6 12 12" }]
+];
+
+// node_modules/lucide/dist/esm/lucide.mjs
+var createIcons = ({
+  icons = {},
+  nameAttr = "data-lucide",
+  attrs = {},
+  root = document,
+  inTemplates
+} = {}) => {
+  if (!Object.values(icons).length) {
+    throw new Error(
+      "Please provide an icons object.\nIf you want to use all the icons you can import it like:\n `import { createIcons, icons } from 'lucide';\nlucide.createIcons({icons});`"
+    );
+  }
+  if (typeof root === "undefined") {
+    throw new Error("`createIcons()` only works in a browser environment.");
+  }
+  const elementsToReplace = Array.from(root.querySelectorAll(`[${nameAttr}]`));
+  elementsToReplace.forEach((element) => replaceElement(element, { nameAttr, icons, attrs }));
+  if (inTemplates) {
+    const templates = Array.from(root.querySelectorAll("template"));
+    templates.forEach(
+      (template) => createIcons({
+        icons,
+        nameAttr,
+        attrs,
+        root: template.content,
+        inTemplates
+      })
+    );
+  }
+  if (nameAttr === "data-lucide") {
+    const deprecatedElements = root.querySelectorAll("[icon-name]");
+    if (deprecatedElements.length > 0) {
+      console.warn(
+        "[Lucide] Some icons were found with the now deprecated icon-name attribute. These will still be replaced for backwards compatibility, but will no longer be supported in v1.0 and you should switch to data-lucide"
+      );
+      Array.from(deprecatedElements).forEach(
+        (element) => replaceElement(element, { nameAttr: "icon-name", icons, attrs })
+      );
+    }
+  }
+};
+
+// public/js/utils.js
+var initIcons = () => createIcons({ icons: { Sun, Moon, Menu, X, MapPin, ArrowDown, ArrowUp, ArrowRight, ArrowLeft, ExternalLink, ChevronDown, Calendar, Clock, Save, Trash2 } });
+
 // public/js/theme.js
 var initThemeToggle = () => {
   const btn = document.getElementById("sunMoon");
   if (!btn) return;
   const isDarkOnLoad = document.documentElement.classList.contains("dark");
   btn.innerHTML = isDarkOnLoad ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
-  lucide.createIcons();
+  initIcons();
   btn.addEventListener("click", () => {
     const isDark = document.documentElement.classList.toggle("dark");
     localStorage.theme = isDark ? "dark" : "light";
     btn.innerHTML = isDark ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
-    lucide.createIcons();
+    initIcons();
   });
 };
 if (localStorage.theme === "dark" || !("theme" in localStorage)) {
@@ -300,7 +577,7 @@ var projects = [
 
 // public/js/components/projCard.js
 function renderProjCard(proj) {
-  const title = `<h3 class="text-2xl md:text-3xl text-sky-500 dark:text-ctp-peach text-center sm:text-left">${proj.title}</h3>`;
+  const title = `<h3 class="font-bold text-2xl md:text-3xl text-sky-500 dark:text-ctp-peach text-center sm:text-left">${proj.title}</h3>`;
   const description = `<p class="text-xs sm:text-base mb-3 text-sky-800 dark:text-slate-100">${proj.description}</p>`;
   const tech = `
     <ul class="tech-tags flex gap-2 flex-wrap mt-2 justify-center sm:justify-start">
@@ -501,6 +778,7 @@ var renderNavBar = () => {
 
 // public/js/index.js
 var nav = document.getElementById("nav-mount").innerHTML = renderNavBar();
+initIcons();
 initThemeToggle();
 var menuBtn = document.getElementById("menuBtn");
 var mobileMenu = document.getElementById("mobileMenu");
@@ -508,7 +786,7 @@ menuBtn.addEventListener("click", () => {
   const isOpen = mobileMenu.classList.toggle("hidden");
   mobileMenu.classList.toggle("flex");
   menuBtn.innerHTML = isOpen ? '<i data-lucide="menu"></i>' : '<i data-lucide="x"></i>';
-  lucide.createIcons();
+  initIcons();
 });
 document.addEventListener("mousemove", (e) => {
   document.documentElement.style.setProperty("--spotlight-x", `${e.clientX}px`);
@@ -546,16 +824,12 @@ sections.forEach((id) => {
   new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        if (heading) {
-          heading.style.animation = "none";
-          heading.offsetHeight;
-          heading.style.animation = "fadeUp 0.6s ease forwards 0.1s";
-        }
-        if (subheading) {
-          subheading.style.animation = "none";
-          subheading.offsetHeight;
-          subheading.style.animation = "fadeUp 0.6s ease forwards 0.25s";
-        }
+        if (heading) heading.style.animation = "none";
+        if (subheading) subheading.style.animation = "none";
+        requestAnimationFrame(() => {
+          if (heading) heading.style.animation = "fadeUp 0.6s ease forwards 0.1s";
+          if (subheading) subheading.style.animation = "fadeUp 0.6s ease forwards 0.25s";
+        });
       } else {
         if (heading) {
           heading.style.opacity = "0";
@@ -575,11 +849,11 @@ var expObserver = new IntersectionObserver((entries) => {
       const btnContainer = document.getElementById("exp-btn-container");
       const expLayout = document.getElementById("exp-layout");
       btnContainer.style.animation = "none";
-      btnContainer.offsetHeight;
-      btnContainer.style.animation = "fadeUp 0.6s ease forwards 0.4s";
       expLayout.style.animation = "none";
-      expLayout.offsetHeight;
-      expLayout.style.animation = "fadeUp 0.6s ease forwards 0.55s";
+      requestAnimationFrame(() => {
+        btnContainer.style.animation = "fadeUp 0.6s ease forwards 0.4s";
+        expLayout.style.animation = "fadeUp 0.6s ease forwards 0.55s";
+      });
     } else {
       document.getElementById("exp-btn-container").style.opacity = "0";
       document.getElementById("exp-layout").style.opacity = "0";
@@ -600,12 +874,14 @@ var resetHeroAnimations = () => {
 var playHeroAnimations = () => {
   heroItems.forEach((el, i) => {
     el.style.animation = "none";
-    el.offsetHeight;
-    el.style.animation = `fadeUp 0.6s ease forwards ${0.1 + i * 0.15}s`;
   });
   imageWrapper.style.animation = "none";
-  imageWrapper.offsetHeight;
-  imageWrapper.style.animation = "fadeUp 0.8s ease forwards 0.4s";
+  requestAnimationFrame(() => {
+    heroItems.forEach((el, i) => {
+      el.style.animation = `fadeUp 0.6s ease forwards ${0.1 + i * 0.15}s`;
+    });
+    imageWrapper.style.animation = "fadeUp 0.8s ease forwards 0.4s";
+  });
 };
 var heroObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -721,21 +997,21 @@ document.querySelectorAll("#exp-btns button").forEach((btn) => {
       return ex.type === expChoice;
     });
     insertExp(filteredExp);
-    lucide.createIcons();
+    initIcons();
   });
 });
 var container = document.getElementById("proj-container");
 projects.forEach((proj) => {
   container.innerHTML += renderProjCard(proj);
 });
-lucide.createIcons();
+initIcons();
 document.querySelectorAll(".learn-more").forEach((btn) => {
   btn.addEventListener("click", () => {
     const panel = btn.closest(".proj-info").querySelector(".proj-details");
     panel.classList.toggle("visible");
     const isVisible = panel.classList.contains("visible");
     btn.innerHTML = isVisible ? 'Hide Details <i data-lucide="arrow-up" class="w-4 h-4"></i>' : 'Learn More <i data-lucide="arrow-down" class="w-4 h-4"></i>';
-    lucide.createIcons();
+    initIcons();
   });
 });
 var projObserver = new IntersectionObserver((entries) => {
@@ -743,10 +1019,11 @@ var projObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       const card = entry.target;
       const index = [...document.querySelectorAll("#proj-container > *")].indexOf(card);
-      card.style.animation = "none";
-      card.offsetHeight;
       const dir = index % 2 === 0 ? "fadeLeft" : "fadeRight";
-      card.style.animation = `${dir} 0.6s ease forwards`;
+      card.style.animation = "none";
+      requestAnimationFrame(() => {
+        card.style.animation = `${dir} 0.6s ease forwards`;
+      });
     } else {
       entry.target.style.opacity = "0";
       entry.target.style.animation = "none";
@@ -850,10 +1127,11 @@ var blogObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       const card = entry.target;
       const index = [...document.querySelectorAll("#blogs > *")].indexOf(card);
-      card.style.animation = "none";
-      card.offsetHeight;
       const dir = index % 2 === 0 ? "fadeLeft" : "fadeRight";
-      card.style.animation = `${dir} 0.6s ease forwards`;
+      card.style.animation = "none";
+      requestAnimationFrame(() => {
+        card.style.animation = `${dir} 0.6s ease forwards`;
+      });
     } else {
       entry.target.style.opacity = "0";
       entry.target.style.animation = "none";
@@ -870,13 +1148,46 @@ new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       viewAllBtn.style.animation = "none";
-      viewAllBtn.offsetHeight;
-      viewAllBtn.style.animation = "fadeUp 0.6s ease forwards 0.3s";
+      requestAnimationFrame(() => {
+        viewAllBtn.style.animation = "fadeUp 0.6s ease forwards 0.3s";
+      });
     } else {
       viewAllBtn.style.opacity = "0";
       viewAllBtn.style.animation = "none";
     }
   });
 }, { threshold: 0.1 }).observe(viewAllBtn);
-lucide.createIcons();
+initIcons();
+/*! Bundled license information:
+
+lucide/dist/esm/defaultAttributes.mjs:
+lucide/dist/esm/createElement.mjs:
+lucide/dist/esm/shared/src/utils/hasA11yProp.mjs:
+lucide/dist/esm/shared/src/utils/mergeClasses.mjs:
+lucide/dist/esm/shared/src/utils/toCamelCase.mjs:
+lucide/dist/esm/shared/src/utils/toPascalCase.mjs:
+lucide/dist/esm/replaceElement.mjs:
+lucide/dist/esm/icons/arrow-down.mjs:
+lucide/dist/esm/icons/arrow-left.mjs:
+lucide/dist/esm/icons/arrow-right.mjs:
+lucide/dist/esm/icons/arrow-up.mjs:
+lucide/dist/esm/icons/calendar.mjs:
+lucide/dist/esm/icons/chevron-down.mjs:
+lucide/dist/esm/icons/clock.mjs:
+lucide/dist/esm/icons/external-link.mjs:
+lucide/dist/esm/icons/map-pin.mjs:
+lucide/dist/esm/icons/menu.mjs:
+lucide/dist/esm/icons/moon.mjs:
+lucide/dist/esm/icons/save.mjs:
+lucide/dist/esm/icons/sun.mjs:
+lucide/dist/esm/icons/trash-2.mjs:
+lucide/dist/esm/icons/x.mjs:
+lucide/dist/esm/lucide.mjs:
+  (**
+   * @license lucide v1.17.0 - ISC
+   *
+   * This source code is licensed under the ISC license.
+   * See the LICENSE file in the root directory of this source tree.
+   *)
+*/
 //# sourceMappingURL=index.bundle.js.map
