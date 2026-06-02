@@ -138,7 +138,8 @@ dist
 .pnp.*
 
 /src/generated/prisma
-public/js/blog.bundle.js
-public/js/blog.bundle.js.map
-public/js/post.bundle.js.map
-public/js/post.bundle.js
+
+# Generated files
+public/js/*.bundle.js
+public/js/*.bundle.js.map
+public/css/style.css
